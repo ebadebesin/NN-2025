@@ -1,0 +1,59 @@
+Non-programming Assignment 
+
+What is the reason for softmax? 
+
+Answer 
+
+Softmax is used in classification problems where we need to assign probabilities to multiple classes. 
+
+It converts output (logits) into probabilities, so that: 
+
+All output values sum to 1 (making them interpretable as probabilities). 
+
+Each class has a probability between 0 and 1. 
+
+The highest score gets the highest probability while keeping relationships between other class scores. 
+
+It is commonly used in multi-class classification problems, such as image recognition and natural language processing. 
+
+ 
+
+For example, Imagine you have a neural network that's trying to classify images of cats, dogs, and birds. The network might output some raw scores for each category.  Softmax takes these raw scores and turns them into probabilities. So, instead of saying "cat: 2.5, dog: 1.0, bird: 0.8," softmax would say something like "cat: 0.7, dog: 0.2, bird: 0.1." This makes it clear that the network is most confident that the image is a cat.    
+
+Softmax makes the outputs of a neural network more interpretable and suitable for multi-class classification by providing a probability distribution over the classes 
+
+ 
+
+What is softmax and how does it works? 
+
+Answer 
+
+Softmax is a function that takes a vector of inputs and transforms it into a probability distribution. Think of it as a way to convert raw scores or outputs from a neural network into something that resembles probabilities, where all the values sum up to 1.    
+
+How it works mathematically: 
+
+Exponentiation: For each element in the input vector (let's call it 'z'), calculate its exponential (e^z). This ensures all values are positive.    
+
+Normalization: Divide each exponentiated value by the sum of all exponentiated values. This ensures that the resulting values sum up to 1, creating a valid probability distribution.    
+
+In formula form: 
+
+Softmax(z)_i = e^(z_i) / Σ_j e^(z_j)    
+
+Where: 
+
+z_i is the i-th element of the input vector z 
+
+e is the base of the natural logarithm  
+
+Σ_j is the sum over all elements j in the vector z 
+
+How it works: 
+
+Exponentiation: Converts logits into positive values. 
+
+Normalization: Divides by the sum of all exponentiated logits. 
+
+Probability Output: The resulting values represent class probabilities. 
+
+ 

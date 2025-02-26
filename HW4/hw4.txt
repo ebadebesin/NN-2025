@@ -1,0 +1,112 @@
+Non-programming Assignment 
+
+1. Describe the training set batch 
+
+Answer 
+
+A training set batch is a small, randomly selected subset of the entire training dataset used in one iteration of training a neural network. Instead of processing all training data at once, mini-batches help in stabilizing learning and improving efficiency. 
+
+The batch size determines how many samples are processed before the model updates its weights. Common batch sizes range from 16 to 256, depending on available computing resources and the complexity of the model. 
+
+Types of Batch Processing: 
+
+Batch Gradient Descent: Uses the entire dataset for each update (slow but stable). 
+
+Mini-Batch Gradient Descent: Uses small batches (balances efficiency and stability). 
+
+Stochastic Gradient Descent (SGD): Uses one random sample per update (fast but noisy). 
+
+ 
+
+2. Describe the entropy-based loss (cost or error) function and explain why it is used for training neural networks. 
+
+Answer 
+
+The entropy-based loss function, commonly known as cross-entropy loss, measures the difference between the predicted probability distribution and the actual labels in classification tasks. It is defined as: 
+
+J=−1/M ∑ [y^i ln(a^i )+(1−y^i ) ln(1−a^i )]  
+
+Where y is the true label (1 for the correct class, 0 otherwise), and a  is the predicted probability for that class. 
+
+It is used because it stops/corrects incorrect predictions more when the model is very confident about the wrong answer. This helps the network learn better by adjusting weights in a way that reduces uncertainty and improves classification accuracy. 
+
+The loss decreases as the model becomes better at making accurate predictions. 
+
+ 
+
+3. Describe neural network supervised training process. 
+
+Answer 
+
+In supervised training, a neural network learns from labeled data by repeatedly adjusting its weights to minimize the difference between predicted and actual outputs. The process follows these steps: 
+
+Initialization: Initialize weights and biases randomly. 
+
+Forward Propagation: Pass input data through the network layer by layer. Compute weights, biases, and activation functions. 
+
+Loss Computation: Compare predictions with actual labels using a loss function (e.g., cross-entropy). 
+
+Backpropagation: Compute the gradient of the loss with respect to weights and biases using the chain rule. Adjust weights using gradient descent or another optimization algorithm. 
+
+Update Weights and Biases: Apply updates based on computed gradients. 
+
+Repeat Steps 2–5: Continue until the model reaches an optimal state. 
+
+Evaluation: Test the trained model on unseen data. 
+
+This process ensures the model learns patterns from labeled data to make accurate predictions. 
+
+ 
+
+4. Describe in detail forward propagation and backpropagation. 
+
+Answer 
+
+Forward Propagation: Forward propagation is the process where input data moves through the neural network to produce an output. 
+
+The input data is passed through the neural network, layer by layer. 
+
+Each neuron applies a weighted sum of its inputs plus a bias, followed by an activation function. 
+
+The process continues until the output layer generates predictions. 
+
+Example formula for a neuron in a hidden layer: 
+
+z = W * X + b 
+
+where W is the weight matrix, X is the input, and b is the bias. 
+
+The activation function (like ReLU or sigmoid) is applied: 
+
+a = f(z) 
+
+The final output is produced, and predictions are compared with actual labels to compute the loss. 
+
+ 
+
+Backpropagation: Backpropagation is the process of adjusting weights to minimize the loss using gradients. 
+
+This is the process of adjusting the neural network’s parameters to reduce the error. 
+
+The error is propagated backward from the output layer to update weights using the chain rule of differentiation. 
+
+Steps: 
+
+Compute the loss gradient with respect to the output. 
+
+Propagate the gradient backward through each layer. 
+
+Compute the gradient of each layer’s weights and biases. 
+
+Update the parameters using an optimization algorithm. 
+
+Repeat until the loss converges. 
+
+ 
+
+Forward propagation generates initial and subsequent predictions as output, while backpropagation updates the model's parameters to improve accuracy over time, which allows effective learning in neural networks.  
+
+ 
+
+ Describe the following activation functions and their usage: linear, ReLU, sigmoid, tanh, and softmax.
+ 

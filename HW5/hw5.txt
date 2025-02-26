@@ -1,0 +1,9 @@
+Linear activation function: This is the simplest one. It's just f(x) = x. Basically, the output is directly proportional to the input. We don't use it much in neural networks by itself because it doesn't introduce any non-linearity, which is crucial for learning complex patterns. It's sometimes used in the final layer for regression problems where you want a continuous output. 
+
+ReLU (Rectified Linear Unit) activation function: f(x) = max(0, x). So, if the input is positive, the output is the same as the input. If the input is negative, the output is zero. ReLU is super popular because it's computationally efficient and helps with the vanishing gradient problem (which is something that can hinder training). It's commonly used in hidden layers of neural networks. 
+
+Sigmoid activation function: f(x) = 1 / (1 + exp(-x)). This compresses the output between 0 and 1. It's most times used in the final layer for binary classification problems where you need a probability-like output. It is a convenient activation function for the output layers because of the logistic regression nature. 
+
+Tanh(Hyperbolic Tangent) activation function: It is similar to sigmoid, but the output ranges between -1 and 1. It's also sometimes used in hidden layers, but ReLU is often preferred. The tanh function is used in hidden layers because it centers the data around zero, which can lead to faster convergence during training. 
+
+Softmax activation function: This is used for multi-class classification. The formula looks something like this: f(x_i) = exp(x_i) / sum(exp(x_j)). It takes a vector of inputs and transforms it into a probability distribution where all the outputs sum up to 1. So, each output represents the probability of the input belonging to a specific class. It's always used in the final layer of a neural network for multi-class classification. 

@@ -1,0 +1,101 @@
+Non-programming Assignment 
+
+What is normalization and why is it needed? 
+
+Answer 
+
+Essentially, normalization is a preprocessing step that scales your input features to a similar range. A common range is between 0 and 1, or sometimes -1 and 1. Think of it like getting everything onto a level playing field. By bringing all the features to a similar scale, you prevent features with inherently larger numerical values from overshadowing the others. Each feature gets to contribute more equally to the learning process. 
+
+Now, why do we need normalization? There are a few key reasons: 
+
+Faster Convergence: When your features are on similar scales, the gradients during training are much more stable. This leads to faster convergence, meaning your model learns more quickly. Normalized data lets you reach the optimal solution much faster. 
+
+Prevents Large Weight Updates: With unnormalized data, a large value in one feature could cause a disproportionately large weight update, potentially throwing off the entire training process. Normalization helps to avoid these wild swings in weight updates. 
+
+Improved Accuracy: By ensuring all features contribute equally, normalization helps your model generalize better. It's less likely to get stuck in local optima or overfit to specific features. It allows the model to learn more nuanced relationships in the data. 
+
+Reduces Vanishing/Exploding Gradient Problems: This is particularly relevant for deep networks. Normalization helps to keep activations within a reasonable range, which can mitigate the vanishing or exploding gradient problems. These problems can hinder training by making gradients too small or too large, respectively. 
+
+So, in a nutshell, normalization is crucial because it ensures that all features are treated fairly during training. It leads to faster convergence, more stable weight updates, improved accuracy, and helps to mitigate some of the challenges associated with training deep neural networks.  
+
+ 
+
+What are vanishing and exploding gradients? 
+
+Answer 
+
+When training deep neural networks, two common headaches are vanishing and exploding gradients. During backpropagation, we calculate gradients to update the network's weights. Ideally, these gradients tell us how to adjust the weights to improve the model's performance. But sometimes, things go awry. 
+
+Vanishing gradients: As gradients are backpropagated through the layers of a deep network, they can become progressively smaller. This is especially true when using activation functions like sigmoid or tanh, which tend to squash values into a limited range. So, by the time the gradient reaches the earlier layers, it's tiny, making the weight updates negligible. Those earlier layers basically stop learning, hindering the overall training process.  
+
+Exploding gradients: Gradients can become excessively large, causing the weights to grow uncontrollably. This leads to unstable training, and the model can diverge, meaning it's getting worse instead of better. Common causes include large initial weight values or a learning rate that's too high. 
+
+So, what can we do about these issues? For vanishing gradients, some common solutions are: 
+
+Switching to ReLU-based activations: ReLU and its variants don't suffer from the same squashing problem as sigmoid or tanh, allowing gradients to flow more freely. 
+
+Batch Normalization: This technique helps to stabilize activations throughout the network, which in turn helps stabilize gradients. 
+
+For exploding gradients, we can try: 
+
+Gradient Clipping: This involves setting a threshold for the gradient's magnitude. If the gradient exceeds the threshold, it's scaled down to keep it within bounds. 
+
+Smaller Weight Initialization: Using careful weight initialization techniques, like Xavier or He initialization, can help to prevent gradients from becoming too large in the first place. 
+
+Essentially, vanishing gradients make training too slow in some parts of the network, while exploding gradients make it unstable. These techniques are designed to help gradients flow smoothly and effectively, allowing for stable and efficient training of deep networks. 
+
+ 
+
+What Adam algorithm and why is it needed? 
+
+Answer 
+
+Talking optimization algorithms, there is the stochastic gradient descent (SGD). It's a classic, but it not the best. One of the main issues is that you have to carefully tune the learning rate, and a single global learning rate might not be ideal for all parameters. Plus, it can struggle with noisy or sparse data, which is common in a lot of real-world applications. 
+
+That's where Adam optimization Algorithm comes in. It's like SGD's but better. Adam, which stands for Adaptive Moment Estimation, is an algorithm that builds on two other optimization methods: momentum and RMSprop. Break down: 
+
+Momentum: Imagine pushing a ball down a hill. Momentum helps it keep rolling even when the slope changes. Similarly, in optimization, momentum helps the updates to the parameters "smooth out" and avoid getting stuck in shallow local minima. 
+
+RMSprop: This method addresses the issue of varying learning rates by scaling the learning rate for each parameter individually. It keeps track of the exponentially decaying average of past squared gradients and uses that to adjust the learning rate. This is really helpful because different parameters might require different learning rates depending on their sensitivity. 
+
+Adam combines these two ideas. It calculates an exponentially decaying average of past gradients (like momentum) and an exponentially decaying average of past squared gradients (like RMSprop). It then uses these moments to adapt the learning rate for each parameter. 
+
+Why is this useful? 
+
+Faster Convergence: Adam often converges much faster than vanilla SGD. It's more efficient at navigating the complex loss landscapes of deep learning models. 
+
+Works with Non-Stationary Objectives: In deep learning, the objective function can change during training. Adam's adaptive learning rates make it more robust to these changes. 
+
+Less Hyperparameter Tuning: While Adam does have hyperparameters, it's generally less sensitive to their settings than SGD. This means you often don't have to spend as much time tweaking learning rates and other parameters. 
+
+In summary, Adam is a powerful optimization algorithm that combines the best aspects of momentum and RMSprop. It provides faster convergence, handles sparse data effectively, adapts to changing objectives, and reduces the burden of hyperparameter tuning.  
+
+ 
+
+How to choose hyperparameters? 
+
+Answer 
+
+First, hyperparameters as the settings you tweak before training, not the weights the network learns during training.  
+
+Some key hyperparameters: 
+
+Learning Rate (α or r): This controls how quickly your model learns. Too high, and it'll overshoot the optimal solution and diverge. Too low, and it'll learn slowly. A good starting point for Adam is around 0.001, and for SGD, maybe 0.01. It's also common practice to decay the learning rate over time, gradually reducing it as training progresses. 
+
+Batch Size: This determines how many data points are used in each training iteration. Small batches (like 32-128) introduce more noise, which can actually help the model generalize better and avoid getting stuck in local minima. Large batches (256+) train faster but can lead to overfitting. A sweet spot is often somewhere between 64 and 256. 
+
+Number of Layers/Neurons: Too few layers or neurons, and your model will underfit – it won't be able to capture the complexity of the data. Too many, and you risk overfitting and making the model computationally expensive. The best approach is to start small and gradually increase until you see diminishing returns in performance. 
+
+Now, how do you actually choose these values? Some strategies are: 
+
+Grid Search: You define a range of values for each hyperparameter and try all possible combinations. It's thorough but can be computationally expensive. 
+
+Random Search: Instead of trying all combinations, you randomly sample values from the defined ranges. This is often more efficient than grid search, especially when you have many hyperparameters. 
+
+Bayesian Optimization: This is a more intelligent approach that uses past evaluations to guide the search for optimal hyperparameters. It builds a probabilistic model of the objective function and uses it to choose the most promising hyperparameter combinations to try next. 
+
+Early Stopping: This isn't a hyperparameter itself, but a technique to prevent overfitting. You monitor the validation loss during training and stop when it starts to increase, even if the training loss is still decreasing. 
+
+The key is to combine these strategies with your intuition and experience. Start with reasonable defaults, then systematically experiment, keeping track of your results. Hyperparameter tuning is often an iterative process. 
+
+ 

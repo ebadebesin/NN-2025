@@ -1,0 +1,118 @@
+HW to Chapter 8 “Initialization and Training Sets” 
+
+Non-programming Assignment 
+
+1. To which values to initialize parameters (W, b) in deep neural networks and why? 
+
+Answer 
+
+Parameters W and b should be initialized properly to ensure efficient training. 
+
+If all weights are initialized to the same value (e.g., zero), all neurons in a layer will learn the same features, leading to symmetry problems. 
+
+A common method is Xavier initialization, which initializes weights from a normal distribution with mean 0 and variance 
+1/n^[n−1]
+  (where n − 1 is the number of input neurons). 
+
+Biases b are typically initialized to small values (e.g., zero) since they do not suffer from symmetry issues. 
+
+Proper initialization prevents exploding or vanishing gradients and helps maintain stable variance across layers. 
+
+ 
+
+2. Describe the problem of exploding and vanishing gradients? 
+
+Answer 
+
+When training deep neural networks, backpropagation involves computing gradients through multiple layers. Two issues can arise: 
+
+Vanishing Gradients: When weights are initialized too small, gradients shrink exponentially, causing earlier layers to stop learning effectively. Shrinking gradients lead to convergence before reaching the minimum value. Initializing weights with smaller values will lead to divergence or a slow-down in the training of your neural network 
+
+Exploding Gradients: When weights are initialized too large, gradients during backpropagation grow exponentially. If gradients grow uncontrollably, weight updates become excessively large, leading to instability and divergence making training difficult. This often happens when using large weight values or deep architectures without proper initialization. 
+
+Both issues slow down training or lead to the model divergence or converging poorly. 
+
+ 
+
+3. What is Xavier initialization? 
+
+Answer  
+
+Xavier initialization sets weights using a normal distribution with mean 0 and variance 
+1/n^[n−1]
+  (where n−1 is the number of input neurons).  
+
+This ensures that the variance of activations remains consistent across layers, preventing exploding or vanishing gradients. 
+
+Machine Learning Engineers using Xavier initialization would either initialize the weights as N(0,1/n[s−1]) or as N(0,2/(n[s−1] n[s])) 
+
+Works best with tanh activation functions. For ReLU, a modified version called He initialization is used, which scales variance by 
+2/n^[n−1]. 
+
+ 
+
+4. Describe training, validation, and testing data sets and explain their role and why all they are needed. 
+
+Answer 
+
+Training set: Used to train the model by adjusting parameters to minimize error. This is the largest portion of the dataset, the model learns patterns from this data. 
+
+Validation set: Used during training to tune hyperparameters (e.g., learning rate, system architecture) and monitor performance to prevent overfitting by providing an unbiased evaluation of model performance. 
+
+Test set: Used after training to evaluate final model performance on unseen data. 
+
+All three are necessary to ensure the model generalizes well and performs reliably on new data. The  model learns effectively while avoiding overfitting and providing an accurate assessment of performance. 
+
+ 
+
+5. What is training epoch? 
+
+Answer 
+
+A training epoch is one complete cycle of the entire training dataset through the neural network. Since training is iterative, multiple epochs are needed to optimize weights and allow the model to refine its parameters iteratively. 
+
+Too few epochs can lead to underfitting, while too many can cause overfitting. Early stopping and monitoring validation loss help determine an optimal number of epochs. 
+
+ 
+
+6. How to distribute training, validation, and testing sets? 
+
+Answer 
+
+A common split is 80% training, 10% validation, 10% test. 
+
+For large datasets (10,000+ samples), the ratio may shift to 90-5-5 or even 98-1-1. 
+
+The validation and test sets should come from the same distribution, while the training set can be more diverse. 
+
+A common distribution strategy is: 
+
+Training Set: 70-80% of the dataset 
+
+Validation Set: 10-15% of the dataset 
+
+Testing Set: 10-15% of the dataset 
+
+The exact split depends on dataset size.  
+
+ 
+
+7. What is data augmentation and why may it needed? 
+
+Answer 
+
+Data augmentation artificially expands the training set by applying transformations such as flipping, rotating, scaling, and adding noise to existing data. 
+
+It helps improve generalization, reduce overfitting, and enhance model robustness, especially when data is limited. 
+
+Techniques include basic transformations, feature space augmentation, GAN-based augmentation, and meta-learning. 
+
+Examples 
+
+Image Augmentation: Rotation, flipping, cropping, brightness adjustments. 
+
+Text Augmentation: Synonym replacement, back translation. 
+
+Audio Augmentation: Noise addition, pitch shifting. 
+
+ 

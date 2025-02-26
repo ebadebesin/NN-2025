@@ -1,0 +1,74 @@
+What is learning rate decay and why is it needed? 
+Answer 
+
+Learning rate controls how quickly your model learns. Too high, and it'll overshoot the optimal solution and diverge. Too low, and it'll learn slowly. 
+
+For example, Imagine you're trying to find the bottom of a valley in a foggy landscape. The learning rate is like the size of your steps. A large learning rate lets you cover ground quickly, but you might overshoot the bottom and bounce around. A small learning rate makes you take tiny steps, which can be slow and tedious. 
+
+Learning rate decay is like starting with big steps to get close to the bottom quickly and then gradually decreasing the step size as you get closer to fine-tune your position. It's a way to balance speed and precision in finding the optimal solution. 
+
+Why is it needed? 
+
+Faster initial progress: A larger learning rate at the beginning allows the model to quickly explore the parameter space and make significant progress. 
+
+Fine-tuning later: As the model gets closer to the optimal solution, a smaller learning rate allows it to make more precise adjustments and avoid overshooting. 
+
+Improved convergence: Decay can help the model settle into a good minimum of the loss function, rather than circling around it. 
+
+ 
+
+What are saddle and plateau problems? 
+
+Answer 
+
+These are challenges the optimization algorithm faces when navigating the loss landscape/slope: 
+
+Saddle Points: Imagine a mountain pass – it's high ground in some directions but low ground in others. A saddle point is like that. The gradient might be close to zero, making it seem like you're at a minimum, but you could actually move in another direction to find a better solution. The optimization algorithm can get stuck here. 
+
+Plateaus: Now imagine a wide, flat table top plain. You can wander around, and the loss doesn't change much. The gradient is very small, so the algorithm makes tiny, slow progress, even if you're far from the actual minimum. It can be hard to escape a plateau. 
+
+ 
+
+Why should we avoid grid approach in hyperparameter choice? 
+
+Answer 
+
+Grid search involves trying all possible combinations of hyperparameters within a specified range. While it seems thorough, it has drawbacks:  
+
+Computational Cost: The number of combinations explodes as you add more hyperparameters. Trying every combination becomes impractical very quickly.  
+
+Redundancy: Many combinations might be exploring similar regions of the hyperparameter space, wasting time and computation.  
+
+Curse of Dimensionality: In high-dimensional spaces (many hyperparameters), the grid becomes sparsely populated, meaning you might miss the truly optimal combinations.  
+
+Random search or Bayesian optimization are often better alternatives, as they explore the hyperparameter space more efficiently.  
+
+ 
+
+ 
+
+What is mini batch and how is it used? 
+
+Answer 
+
+Instead of training on the entire dataset at once (batch gradient descent) or one data point at a time (stochastic gradient descent), mini-batches use small subsets of the data (e.g., 32, 64, or 128 data points) for each training iteration. 
+
+How are they used? 
+
+Calculating Gradients: The gradients are calculated based on the data in the mini-batch. This is an approximation of the true gradient (calculated from the entire dataset) but is much faster to compute. 
+
+Updating Weights: These gradients are then used to update the model's weights. 
+
+Iterating Through Data: The training process involves repeatedly iterating through the dataset, using mini-batches to calculate gradients and update weights until the model converges. 
+
+Why are they used? 
+
+Computational Efficiency: Mini-batches are faster than full batch gradient descent because you don't have to wait to process the entire dataset before updating the weights. 
+
+Regularization Effect: The noise introduced by using mini-batches can have a regularizing effect, helping the model generalize better and avoid overfitting. 
+
+Memory Efficiency: Mini-batches are useful when the dataset is too large to fit into memory. 
+
+In essence, mini-batches provide a good balance between the computational efficiency of batch gradient descent and the regularization benefits of stochastic gradient descent. 
+
+ 

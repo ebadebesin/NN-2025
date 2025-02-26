@@ -1,0 +1,349 @@
+Format to answer Questions:
+Write answers in bullet points (avoid long paragraphs).
+Include the full question above your answer before writing your response.
+If the question is about a model or concept, cover the following aspects:
+
+Description (Brief explanation of the concept)
+Architecture (If applicable, describe its components)
+Uses (Where and how it is used)
+Applications (Real-world implementations)
+Features (Key characteristics)
+Advantages (Why it's beneficial)
+Disadvantages (Limitations or drawbacks)
+
+
+Midterm Exam
+Question 1: Describe the artificial neuron model.
+Answer
+Description
+    Artificial Neuron model is the simplified depiction of the neurons (mathematically) for the human brain. It is basically a mathematical model of a brain's neuron. 
+    It is also called perceptron and it is what inspired artificial neural networks. It works by, a neuron recieves an input, processes it in the neuron and then gives an output.
+    The neuron consists of input, weights, bias, activation function, neuron (for processing) and output.
+    This is the bae model that we then build upon to get artificial neural network, deep neural network and so on. 
+Architecture
+    The artificial neurons model has three main parts:
+    1. Input (Dendrites for brain neuron): This is where signal inputs are carried from other neurons to the artificial neuron.
+    2. Neuron: This is the main body or the part of the artificial neuron where the processing occurs. Here the signal are processed then passed along to output.
+    3. Output (Axon): This is the output line that carries the processed signal to other neurons.
+Applications
+    The artificial neuron model is used for various reasons like: Predictions, Pattern recognition, Image processing, Speech recognition, Machine learning
+    The artificial neuron model can adapt to new data and learn from experience, and it can be used on other complex models
+The advantages of the artificial neuron model:
+    1. Train and Learn from data 
+    2. Adapt to new data and situations
+    3. Can be scaled to be used on complex systems
+The disadvantages of the artificial neuron model:
+    1. Limitaions when it comes to understanding the decision-making process
+    2. Can find it difficult to interpret the results
+    3. Overfitting and underfitting 
+
+
+
+
+Question 2: What is the logistic regression problem?
+Answer
+Description
+    Logistic regression problem is a type of regression problem where we try to find binary outcomes, so the target output is a binary output like 0 or 1.
+    We are trying to predict one of two possible outcomes (1 or 0, Yes or No, etc.) .
+Architecture
+    The logistic regression problem is a linear model that uses a logistic function and make prediction to get a binary output. 
+    The logistic function helps us get a probability value which we then use to decide the final outcome
+Uses/Applications
+    The logistic regression problem is used in various fields like:
+    1. Medical diagnosis (predicting if a patient has a disease or not)
+    2. Classification (classifying email as spam or not)
+Features
+    1. Binary target variable: target is always 0 or 1
+    2. Input features: Can be any form of input data 
+    3. Probability output
+The advantages
+    1. Simple to set up and use
+    2. Does not take long to train because of the binary format of logistic regression problems
+    3. Easy to understand
+The disadvantages
+    1. Not work for non-binary target
+    2. Assumes direct relationship between the input and the target which is not always the case
+    3. Not suitable for multi-class classification problems
+
+
+
+
+Question 3: Describe multilayer (deep) neural network.
+Answer
+Description
+    This is essentially an artificial neural network with multiple (more than 1) hidden layers between the input and output. 
+    Each layer has a set of neurons and those neurons are connected to neurons in subsequent and previous layers with weights added.
+Architecture
+    1. Input layer: This is typically the first layer and the first part of your neural network. 
+    It recieves the input data and each neuron in the input layer is a feature from your dataset. So the number of features in your dataset should be the number of neurons in your input layer.
+    2. Hidden layers: These are the layers that are between the input layer and the output layer. This is where the computation, extraction and transformation happens.
+    You are able to extract things from your input data through multilayer processing. The number of neurons in a hidden layer can vary depending on your usecase and complexity of data.
+    3. Output layer: This is the final layer of your neural network. After your model and gone though the input and hidden layers, your output layer gives you the result depending on problem and output features required
+    The number of neurons in the output layer can vary depending on the problem you are trying to solve or number of classes being predicted andd so on.
+Uses
+    1. Image classification
+    2. Speech recognition
+    3. Natural language processing
+    4. Time series prediction
+    5. Recommendation systems
+Advantages
+    1. Learn complex patterns in data
+    2. Learns from large amounts of data
+    3. Can learn non-linear relationships between inputs and outputs
+Disadvantages
+    1. Can be computationally expensive to train 
+    2. Overfitting
+    3. Requires careful tuning of hyperparameters
+    4. Requires large amounts of data to train
+
+
+
+
+Question 4: Describe major activation functions: linear, ReLU, sigmoid, tanh, and softmax. Explain their usage.
+Answer
+Linear activation function
+Description
+This is the type of activation function that you have an input and get an output directly proportional to it. It is mostly used when you are trying to solve regression problems. Most of the time, it is not used is linear and does not work well when you're trying to work with non linear data
+Usage
+Regression problems
+Linear relationship between input and output
+Advantages
+ Easy to compute
+ Simple to implement 
+Disadvantages
+ Does not work well with non-linear data
+
+ReLU (Rectified Linear Unit) activation function
+Description
+This is the most commonly used activation function for hidden layers. It looks somehting like this: f(x) = max(0, x) which basically means if the input is positive, the output is the same as the input and if the input is negative, the output is zero.
+It is computationally efficient and helps with the vanishing gradient problem (which is something that can hinder training).
+Usage
+Hidden layers
+Non-linear data
+Fast computation
+Advantages
+Fast computation
+Helps with vanishing gradient problem
+Disadvantages
+Does not work well with negative values
+Does not have a derivative at zero
+
+
+Sigmoid activation function
+Description
+This is an activation function used most times in the output layer that takes value and maps it to a value between 0 and 1. It's most times used in the final layer especially in probability like classification problem. So it is really efficient for logistic regression problems.
+The formula looks something like this: f(x) = 1 / (1 + exp(-x)). It restricts the output between 0 and 1. 
+Usage
+Final layer
+Binary classification
+Logistic regression
+Advantages
+Efficient for binary classification
+Restricts output between 0 and 1
+Disadvantages
+Can cause vanishing gradient problem
+Does not work well with multi-class classification
+
+
+Tanh(Hyperbolic Tangent) activation function
+Description
+This is an activation function that allows output values to be ranged from -1 to 1. It is known to be similar to the sigmoid function but for tanh it restricts the value between -1 and 1 instead of 0 and 1. It is can be used in hidden layers because it makes sure that your data is not a 0 values which will allow your model to converge faster as you're training. 
+Usage
+Hidden layers
+Multi-class classification
+Advantages
+Restricts output between -1 and 1
+Helps with vanishing gradient problem
+Disadvantages
+Does not work well with binary classification
+Cannot have zero derivative 
+
+
+Softmax activation function
+Description
+This is an activation function that is used in the output layer when you're doing multi-class classification. It basically takes a vector of inputs and processes it into a probabilities. It is like trying to convert your number/output values from a neural network into probabilities, that will all add up to 1. It is mostly used in the last layer/output layer
+Usage
+Output layer
+Multi-class classification
+Advantages
+Restricts output between 0 and 1
+Helps with vanishing gradient problem
+Disadvantages
+Does not work well with binary classification
+Cannot have zero derivative
+Can be slow to compute
+Can be slow to converge
+Can be slow to train
+
+
+
+
+Question 5: What is supervised learning?
+Answer
+Description
+This is a type of machine learning where we train the model based on a dataset that has structure and labels. Which basically means that the model is trained based input paired with an true output. 
+Supervised learning basically learns from the input and expeted output of a dataset then use that model to predict the labels of a new dataset (unseen data).
+Architecture/process
+Collecting Data: We collect our data set that includes input (features) and paired with expected output (labels)
+Preprocessing Data: We clean and preprocess the data to make it suitable for the model. Like encoding, imputing missing values and taking care of noise.
+Train: We build a model that we will train using the labeled datasets. The model learns different permutations of how to pair the features to the labels and also works to minimize the error between predicted labels and actual labels (Loss function).
+Validate and Test: After tarining the model and getting a decent accuracy, we need to get some validation and test dateset to evaluate the model and see how well it was trained. Measure the accuracy of the model on a new dataset.
+Advantages
+Can be used for regression and classification problems
+Can be used for both binary and multi-class classification
+Disadvantages
+Requires large amounts of labeled data
+Requires careful feature engineering
+Can be computationally expensive
+
+Some supervised learning algorithms are: Linear regression, decision trees, logistic regression, neural networks.
+
+
+
+
+Question 6: Describe loss/cost function.
+Answer
+Description
+Loss function is the way to evaluate the distance or difference between the predicted output form the expected output of a model. It basically tells us how well our training process is going and if the model is performing well.
+The goal at the end of the day is that during the model training, we should try to minimize the loss function, which helps improve the accuracy of the model and makes sure that the model is predicting better.
+Architecture
+The loss function takes in the predicted value and actual value and then output a single number that will tell us by how much off or the error that our model is on.
+The formula looks something like this: Loss = y_pred - y_actual
+Types
+Mean squared error (MSE) loss function: calculates the average squared differece of the predicted and the actual values
+cross-entropy loss function: This is most times used. it calculates 
+
+Choosing a specific loss function depends on diiferent things like the type of problem, the wanted properties, etc. 
+We use gradient descent to minimize the loss function by adjusting the parameter of the model and training again till we get a desired accuracy.
+Advantages
+Helps to evaluate the performance of the model
+Helps to improve the accuracy of the model
+Helps to minimize the error between the predicted and actual values
+Disadvantages
+Can be slow to compute
+Can be slow to converge
+Can be sensitive to outliers
+
+
+
+
+Question 7: Describe forward and backward propagation for a multilayer (deep) neural network.
+Answer
+Forward Propagation
+Forward propagation happens when you pass your data from your input layer through your hidden layers and finally to the output layer.
+We are feeding input data through the network to obtain a prediction. The input is passed to the first layer, and the activations of each neuron are calculated using the activation function. These activations are then passed as input to the next layer, and the process is repeated until the output layer is reached. 
+Each layer computes a weighted sum of its inputs, applies the activation function, and passes the result to the next layer. The final layer's activations are the network's predictions.    
+
+Steps: 
+
+The input data is passed through the neural network, layer by layer. 
+Each neuron applies a weighted sum of its inputs plus a bias, followed by an activation function. 
+The process continues until the output layer generates predictions. 
+Example formula for a neuron in a hidden layer: 
+z = W * X + b 
+
+where W is the weight matrix, X is the input, and b is the bias. 
+
+The activation function (like ReLU or sigmoid) is applied: 
+a = f(z) 
+
+The final output is produced, and predictions are compared with actual labels to compute the loss. 
+ 
+
+Backpropagation
+Backward propagation happens when you pass the error from the output layer back through the network to the input 
+We are calculating the gradients of the loss function with respect to each weight in the network. 
+
+It works backward from the output layer to the input layer. First, the gradient of the loss function with respect to the output activations is calculated. Then, using the chain rule of calculus, these gradients are propagated back through the network. At each layer, the gradients are used to calculate the gradients of the loss function with respect to the weights and biases of that layer. These gradients are then used to update the weights during gradient descent. Backpropagation efficiently computes the gradients for all weights in the network, making training deep networks feasible. 
+
+Sample Steps: 
+
+Compute the loss gradient with respect to the output. 
+Propagate the gradient backward through each layer. 
+Compute the gradient of each layer’s weights and biases. 
+Update the parameters using an optimization algorithm. 
+Repeat until the loss converges. 
+
+
+
+Question 8: What are parameters and hyperparameters in neural networks and what is the conceptual difference between them.
+Answer
+Parameters are essentially the variables that are inside the neural network based on the training data. They are the values you use to train your model like weights and biases of the model. 
+During training of your model, you are able to adjust your parameters to improve accuracy and minimize the loss function. After model has been trained, the parameters are not changed and then they are used train new unseen data. 
+
+On the other hand Hyperparameters are the external parameters that you set even before you begin training your model. Your data has nothing to do with your hyperparemters and they chosen to basically control the process of training your model and the architecture of your model. 
+These are the parameters that you use to train your model like the number of layers, the number of neurons in each layer, the learning rate, the number of epochs, etc.
+
+Parameters are the internal variables of the model that are learned and adjusted during the training process based on the input data. They directly influence the model's predictions and are optimized to minimize the loss function.
+Hyperparameters are the external settings that define the model's architecture and the training process. They are set before training begins and are not adjusted during the training process. Instead, they guide how the training is conducted and can affect the model's ability to learn effectively.
+In summary, parameters are the learned components of a neural network that are optimized during training, while hyperparameters are predefined settings that influence the training process and model architecture. Understanding and properly tuning both parameters and hyperparameters are crucial for building effective neural networks.
+
+
+Question 9: How to set the initial values for the neural network training
+Answer
+
+First, hyperparameters as the settings you tweak before training, not the weights the network learns during training.  
+
+Some key hyperparameters: 
+
+Learning Rate (α or r): This controls how quickly your model learns. Too high, and it'll overshoot the optimal solution and diverge. Too low, and it'll learn slowly. A good starting point for Adam is around 0.001, and for SGD, maybe 0.01. It's also common practice to decay the learning rate over time, gradually reducing it as training progresses. 
+
+Batch Size: This determines how many data points are used in each training iteration. Small batches (like 32-128) introduce more noise, which can actually help the model generalize better and avoid getting stuck in local minima. Large batches (256+) train faster but can lead to overfitting. A sweet spot is often somewhere between 64 and 256. 
+
+Number of Layers/Neurons: Too few layers or neurons, and your model will underfit – it won't be able to capture the complexity of the data. Too many, and you risk overfitting and making the model computationally expensive. The best approach is to start small and gradually increase until you see diminishing returns in performance. 
+
+Now, how do you actually choose these values? Some strategies are: 
+
+Grid Search: You define a range of values for each hyperparameter and try all possible combinations. It's thorough but can be computationally expensive. 
+
+Random Search: Instead of trying all combinations, you randomly sample values from the defined ranges. This is often more efficient than grid search, especially when you have many hyperparameters. 
+
+Bayesian Optimization: This is a more intelligent approach that uses past evaluations to guide the search for optimal hyperparameters. It builds a probabilistic model of the objective function and uses it to choose the most promising hyperparameter combinations to try next. 
+
+Early Stopping: This isn't a hyperparameter itself, but a technique to prevent overfitting. You monitor the validation loss during training and stop when it starts to increase, even if the training loss is still decreasing. 
+
+The key is to combine these strategies with your intuition and experience. Start with reasonable defaults, then systematically experiment, keeping track of your results. Hyperparameter tuning is often an iterative process. 
+
+ 
+
+
+Zero Initialization: Setting all weights to zero is generally not recommended because it causes all neurons in the network to learn the same features during training. This symmetry prevents the network from learning effectively, as all neurons in a layer will update their weights in the same way.
+
+Random Initialization: Initializing weights with small random values can help break the symmetry. This approach ensures that neurons learn different features. However, the scale of the random values is important. If the values are too large, they can cause the gradients to explode; if they are too small, they can cause the gradients to vanish.
+
+Xavier (Glorot) Initialization: This method, proposed by Xavier Glorot and Yoshua Bengio, is designed to keep the scale of the gradients roughly the same across all layers. For a layer with ( n ) input neurons and ( m ) output neurons, the weights are initialized using a normal distribution with a mean of 0 and a variance of ( \frac{2}{n + m} ). Alternatively, a uniform distribution with a range of ( \pm \sqrt{\frac{6}{n + m}} ) can be used.
+
+He Initialization: Proposed by Kaiming He and his colleagues, this method is particularly effective for networks using ReLU activation functions. For a layer with ( n ) input neurons, the weights are initialized using a normal distribution with a mean of 0 and a variance of ( \frac{2}{n} ). This initialization helps to maintain the variance of the activations throughout the network, preventing the gradients from vanishing or exploding.
+
+LeCun Initialization: This method is similar to Xavier initialization but is specifically designed for networks using the sigmoid or tanh activation functions. The weights are initialized using a normal distribution with a mean of 0 and a variance of ( \frac{1}{n} ), where ( n ) is the number of input neurons.
+
+Bias Initialization: Biases are typically initialized to zero or small positive values. Initializing biases to zero is common practice, as it does not affect the symmetry-breaking process that is primarily handled by the weight initialization.
+
+In summary, setting the initial values for neural network training involves carefully choosing the initialization strategy for the weights to ensure effective learning. Common methods include random initialization, Xavier initialization, He initialization, and LeCun initialization, each tailored to different types of activation functions and network architectures. Proper initialization helps to prevent issues such as vanishing or exploding gradients and facilitates faster convergence during training.
+
+
+
+Question 10: Why are mini-batches used instead of complete batches in training of neural networks.
+Answer
+Instead of training on the entire dataset at once (batch gradient descent) or one data point at a time (stochastic gradient descent), mini-batches use small subsets of the data (e.g., 32, 64, or 128 data points) for each training iteration. 
+
+How are they used? 
+
+Calculating Gradients: The gradients are calculated based on the data in the mini-batch. This is an approximation of the true gradient (calculated from the entire dataset) but is much faster to compute. 
+
+Updating Weights: These gradients are then used to update the model's weights. 
+
+Iterating Through Data: The training process involves repeatedly iterating through the dataset, using mini-batches to calculate gradients and update weights until the model converges. 
+
+Why are they used? 
+
+Computational Efficiency: Mini-batches are faster than full batch gradient descent because you don't have to wait to process the entire dataset before updating the weights. 
+
+Regularization Effect: The noise introduced by using mini-batches can have a regularizing effect, helping the model generalize better and avoid overfitting. 
+
+Memory Efficiency: Mini-batches are useful when the dataset is too large to fit into memory. 
+
+In essence, mini-batches provide a good balance between the computational efficiency of batch gradient descent and the regularization benefits of stochastic gradient descent. 
+
+ 
+

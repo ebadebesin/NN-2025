@@ -1,0 +1,99 @@
+HW to Chapter 9 “Fitting, Bias, Regularization, and Dropout” 
+
+Non-programming Assignment: 
+
+1. What are underfitting and overfitting? 
+
+Answer 
+
+Underfitting occurs when a machine learning model is too simple and fails to capture the underlying patterns in the data. It has high bias and poor performance on both training and test data. It often happens when the model has too few parameters, lacks depth, or is trained for too few epochs. 
+
+Overfitting happens when a model is too complex and memorizes the training data too much and also noise in the training data instead of generalizing. It happens when the model is too complex, trained for too many epochs, or lacks regularization. It has high variance, leading to good training performance but poor test performance. 
+
+A well-trained model finds the right balance, generalizing well to new, unseen data. 
+
+ 
+
+2. What may cause an early stopping of the gradient descent optimization process? 
+
+Answer 
+
+Early stopping is a regularization technique that halts training when the validation loss stops decreasing and starts increasing, indicating potential overfitting. 
+
+Causes of early stopping:  
+
+Overfitting: The model starts memorizing training data instead of learning general patterns. If validation loss starts increasing while training loss decreases, early stopping prevents overfitting. 
+
+Gradient explosion or vanishing: If gradients become too large or too small, training can become unstable or stalled. 
+
+Poor learning rate selection: A learning rate that is too high can cause instability, while too low can make training too slow. 
+
+Convergence to a local minimum: If the model reaches a point where further improvements are negligible. So if the loss function stabilizes and further iterations cause minimal improvement, training stops. 
+
+ 
+
+3. Describe the recognition bias vs variance and their relationship. 
+
+Answer 
+
+Bias refers to errors due to overly simplistic models that fail to capture patterns (high bias -> underfitting). 
+
+Variance refers to errors due to overly complex models that learn noise instead of patterns (high variance -> overfitting). 
+
+Bias-Variance Tradeoff:  
+
+High bias: Model is too simple and makes systematic errors. 
+
+High variance: Model is too complex and reacts too much to training data fluctuations. 
+
+The goal is to find a balance where both bias and variance are minimized, allowing the model to generalize well. 
+
+ 
+
+4. Describe regularization as a method and the reasons for it. 
+
+Answer 
+
+Regularization is used to reduce overfitting by adding constraints to the model. 
+
+Common techniques:  
+
+L1 Regularization (Lasso): Adds an absolute value penalty to weights, leading to sparse models by setting some weights to zero. 
+
+L1 = ∑|w| 
+
+L2 Regularization (Ridge): Adds a squared penalty to weights, reducing the impact of large weights but keeping all features. 
+
+L2 = ∑w^2 
+
+Dropout: Randomly deactivates neurons during training to prevent over-reliance on specific features. 
+
+Reason for regularization:  
+
+Prevents the model from becoming too complex and overfitting. 
+
+Encourages simpler models that generalize better to unseen data. 
+
+ 
+
+5. Describe dropout as a method and the reasons for it. 
+
+Answer 
+
+Dropout is a regularization technique that randomly deactivates a fraction of neurons during training, preventing reliance on specific neurons. 
+
+How it works:  
+
+At each training step, neurons are randomly dropped with a probability p. 
+
+During inference (testing), all neurons are active, but activations are scaled. 
+
+Why dropout is needed:  
+
+Prevents overfitting by forcing the network to learn multiple redundant representations. 
+
+Reduces co-adaptation between neurons, improving generalization. 
+
+Effectively trains an ensemble of subnetworks, making the model more robust. 
+
+ 
