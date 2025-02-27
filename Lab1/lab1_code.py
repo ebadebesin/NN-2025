@@ -97,12 +97,13 @@ class LossFunction:
     
     @staticmethod
     def binary_cross_entropy(y_true, y_pred):
-        epsilon = 1e-15
-        y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
+        epsilon = 1e-15  # Small constant to avoid log(0)
+        y_pred = np.clip(y_pred, epsilon, 1 - epsilon)  # Keep y_pred in range (epsilon, 1-epsilon)
         return -np.mean(y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred))
 
     @staticmethod
     def binary_cross_entropy_derivative(y_true, y_pred):
+        # return y_pred - y_true
         epsilon = 1e-15
         y_pred = np.clip(y_pred, epsilon, 1 - epsilon)  # Clip values
         return (y_pred - y_true) / (y_pred * (1 - y_pred) + epsilon)  # Avoid division by zero
@@ -164,7 +165,7 @@ class Training:
     """Class to train the deep neural network."""
     
     @staticmethod
-    def train(model, X, y, epochs, learning_rate):
+    def train(model, X, y, epochs, learning_rate, clip_value=1.0):
         for epoch in range(epochs):
             # Forward pass
             output = model.forwardProp(X)
@@ -175,34 +176,103 @@ class Training:
             # Backpropagation
             BackPropagation.calc(model, X, y, learning_rate)
 
+            # Gradient clipping
+            for layer in model.layers:
+                np.clip(layer.weights, -clip_value, clip_value, out=layer.weights)
+                np.clip(layer.biases, -clip_value, clip_value, out=layer.biases)
+            
+
             if epoch % 10 == 0:
                 print(f"Epoch {epoch}, Loss: {loss}")
 
 
 if __name__ == "__main__":
+    import pandas as pd
+    import numpy as np
+    from sklearn.preprocessing import LabelEncoder, StandardScaler
+    from sklearn.model_selection import train_test_split
 
-    # Example dataset (you can replace this with your actual dataset)
-    X = np.array([[0, 0], [0, 1], [1, 0], [1, 1], [0, 0]])  # Input
-    y = np.array([[0], [1], [1], [0], [0]])  # Target output
+    # Load the dataset
+    data = pd.read_csv('Lab1/accident.csv')
+    # print(data.head())
+
+    # Convert categorical variables to numerical values
+    label_encoders = {}
+    categorical_columns = ['Gender', 'Helmet_Used', 'Seatbelt_Used']
+
+    for column in categorical_columns:
+        label_encoders[column] = LabelEncoder()
+        data[column] = label_encoders[column].fit_transform(data[column])
+
+    # Separate features and target variable
+    X = data.drop('Survived', axis=1)
+    y = data['Survived']
+
+
+    X.fillna(X.mean(), inplace=True)  # Replace NaNs with column mean
+
+
+    # Normalize numerical features
+    scaler = StandardScaler()
+    X[['Age', 'Speed_of_Impact']] = scaler.fit_transform(X[['Age', 'Speed_of_Impact']])
+
+    # Convert to NumPy arrays
+    X = X.values
+    y = y.values.reshape(-1, 1)  # Ensure y is a column vector
+
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Print first few rows for verification
+    print("X_train:", X_train[:5])
+    print("y_train:", y_train[:5])
 
     # Define network structure
-    layer_sizes = [2, 10, 8, 8, 4, 1]  # Input layer: 2, Hidden layers: 10, 8, 8, 4 neurons, Output: 1 neuron
-    activations = [Activation.relu, Activation.relu, Activation.relu, Activation.relu, Activation.sigmoid]  # Activation functions
+    input_size = X_train.shape[1]
+    layer_sizes = [input_size, 10, 8, 8, 4, 1]  # Adjust input layer size based on features
+    activations = [Activation.relu, Activation.relu, Activation.relu, Activation.relu, Activation.sigmoid]
     loss_function = LossFunction.binary_cross_entropy
 
     # Initialize model
     dnn = DeepNeuralNetwork(layer_sizes, activations, loss_function)
 
     # Train model
-    Training.train(dnn, X, y, epochs=1000, learning_rate=0.01)
+    Training.train(dnn, X_train, y_train, epochs=100, learning_rate=0.001, clip_value=1.0)
 
     # Test model
-    predictions = (dnn.forwardProp(X) > 0.5).astype(int)
-    print("Predictions:", predictions)
+    predictions = (dnn.forwardProp(X_test) > 0.5).astype(int)
+    print("Predictions:", predictions.T)
 
     # Accuracy
-    accuracy = np.mean(predictions == y)
-    print("Accuracy:", accuracy)  # Should be around 1.0 (100%) for this simple dataset
+    accuracy = np.mean(predictions == y_test)
+    print("Accuracy:", accuracy)
+
+
+
+
+    
+    # # Example dataset (you can replace this with your actual dataset)
+    # X = np.array([[0, 0], [0, 1], [1, 0], [1, 1], [0, 0]])  # Input
+    # y = np.array([[0], [1], [1], [0], [0]])  # Target output
+
+    # # Define network structure
+    # layer_sizes = [2, 10, 8, 8, 4, 1]  # Input layer: 2, Hidden layers: 10, 8, 8, 4 neurons, Output: 1 neuron
+    # activations = [Activation.relu, Activation.relu, Activation.relu, Activation.relu, Activation.sigmoid]  # Activation functions
+    # loss_function = LossFunction.binary_cross_entropy
+
+    # # Initialize model
+    # dnn = DeepNeuralNetwork(layer_sizes, activations, loss_function)
+
+    # # Train model
+    # Training.train(dnn, X, y, epochs=1000, learning_rate=0.01)
+
+    # # Test model
+    # predictions = (dnn.forwardProp(X) > 0.5).astype(int)
+    # print("Predictions:", predictions)
+
+    # # Accuracy
+    # accuracy = np.mean(predictions == y)
+    # print("Accuracy:", accuracy)  # Should be around 1.0 (100%) for this simple dataset
 
 
 ############ Sample output: with 100 epochs #############
@@ -332,3 +402,43 @@ if __name__ == "__main__":
 #  [0]
 #  [0]]
 # Accuracy: 1.0
+
+
+############ Sample output: with 10000 epochs ############
+# X_train: [[ 0.64242306  1.         -1.18841803  1.          0.        ]
+#  [ 0.97789202  1.          1.32645971  0.          1.        ]
+#  [ 1.1791734   0.          1.1923329   1.          1.        ]
+#  [-0.36398382  0.         -1.52373506  1.          1.        ]
+#  [-1.30329691  1.         -1.28901314  0.          0.        ]]
+# y_train: [[0]
+#  [1]
+#  [0]
+#  [0]
+#  [1]]
+# Epoch 0, Loss: 0.6939286948673203
+# Epoch 10, Loss: 0.6906351176184179
+# Epoch 20, Loss: 0.6902941536732282
+# Epoch 30, Loss: 0.6899225702893849
+# Epoch 40, Loss: 0.6895987188040069
+# Predictions: [[1 1 0 0 1 1 1 1 1 1 1 0 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#   1 1 1 1]]
+# Accuracy: 0.5
+
+# X_train: [[ 0.64242306  1.         -1.18841803  1.          0.        ]
+#  [ 0.97789202  1.          1.32645971  0.          1.        ]
+#  [ 1.1791734   0.          1.1923329   1.          1.        ]
+#  [-0.36398382  0.         -1.52373506  1.          1.        ]
+#  [-1.30329691  1.         -1.28901314  0.          0.        ]]
+# y_train: [[0]
+#  [1]
+#  [0]
+#  [0]
+#  [1]]
+# Epoch 0, Loss: 0.687163141106254
+# Epoch 10, Loss: 0.6880993124097476
+# Epoch 20, Loss: 0.6870076406746752
+# Epoch 30, Loss: 0.6857835895308155
+# Epoch 40, Loss: 0.6843095303318802
+# Predictions: [[1 0 1 1 1 1 0 0 1 1 1 1 0 0 0 0 1 0 1 0 0 1 1 1 1 1 1 1 0 1 0 0 0 1 0 1
+#   1 1 0 1]]
+# Accuracy: 0.65
