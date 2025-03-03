@@ -125,7 +125,7 @@ class DeepNeuralNetwork:
             self.layers.append(Layer(layer_sizes[i], layer_sizes[i + 1], activations[i]))
 
         self.loss_function = loss_function
-        self.loss_derivative = LossFunction.binary_cross_entropy_derivative 
+        self.loss_derivative = LossFunction.cross_entropy_derivative 
         
     def forwardProp(self, X):
         """Performs forward propagation through all layers."""
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     input_size = X_train.shape[1]
     layer_sizes = [input_size, 10, 8, 8, 4, 1]  # Adjust input layer size based on features
     activations = [Activation.relu, Activation.relu, Activation.relu, Activation.relu, Activation.sigmoid]
-    loss_function = LossFunction.binary_cross_entropy
+    loss_function = LossFunction.cross_entropy
 
     # Initialize model
     dnn = DeepNeuralNetwork(layer_sizes, activations, loss_function)
